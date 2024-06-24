@@ -8,16 +8,24 @@ class RPCError(Exception):
 class BitsharesWebsocketClient():
     def __init__(self, websocket_url):
         self.url = websocket_url
-        self._connect()
-
-    def _connect(self):
-        self.ws = create_connection(self.url)
+        self.ws = None
         self.request_id = 1
         self.api_ids = {
             'database': 0,
             'login': 1
         }
+        self._connect()
 
+    def _connect(self):
+        try:
+            self.ws = create_connection(self.url)
+            print("WebSocket connection established.")
+        except Exception as e:
+            print(f"Failed to connect to WebSocket at {self.url}: {e}")
+
+    def send_request(self, method, params):
+        # Implement sending requests via WebSocket here
+        pass
     
     def request(self, api, method_name, params):
         try:
