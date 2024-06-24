@@ -1,14 +1,17 @@
-from websocket import create_connection, WebSocketConnectionClosedException
+from websocket import create_connection, WebSocketException, WebSocketConnectionClosedException
+import logging
 import json
 from services.cache import cache
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class RPCError(Exception):
     pass
 
-class BitsharesWebsocketClient():
+class BitsharesWebsocketClient:
     def __init__(self, websocket_url):
         self.url = websocket_url
-        self.ws = None
         self.request_id = 1
         self.api_ids = {
             'database': 0,
@@ -18,15 +21,13 @@ class BitsharesWebsocketClient():
 
     def _connect(self):
         try:
+            logger.info(f"Attempting to connect to WebSocket URL: {self.url}")
             self.ws = create_connection(self.url)
-            print("WebSocket connection established.")
-        except Exception as e:
-            print(f"Failed to connect to WebSocket at {self.url}: {e}")
+            logger.info("WebSocket connection established.")
+        except WebSocketException as e:
+            logger.error(f"WebSocket connection failed: {e}")
+            raise
 
-    def send_request(self, method, params):
-        # Implement sending requests via WebSocket here
-        pass
-    
     def request(self, api, method_name, params):
         try:
             return self._safe_request(api, method_name, params)
