@@ -3,13 +3,13 @@ import logging
 
 logging.basicConfig()
 
-options = {'swagger_url': '/apidocs'}
+# options = {'swagger_url': '/apidocs'}
 # strict_validation=True: requests that include parameters not defined return a 400 error
 # app = connexion.App('bitshares-explorer-api', specification_dir='swagger/', options=options)
 app = connexion.App(
     'bitshares-explorer-api',
     specification_dir='swagger/',
-    swagger_ui_options={'swagger_url': '/apidocs'}
+    options={'swagger_url': '/apidocs'}
 )
 
 from flask_cors import CORS
