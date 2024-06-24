@@ -9,21 +9,7 @@ options = {'swagger_url': '/apidocs'}
 app = connexion.App(
     'bitshares-explorer-api',
     specification_dir='swagger/',
-    lifespan=None,
-    middlewares=None,
-    server_args=None,
-    arguments=None,
-    auth_all_paths=None,
-    jsonifier=None,
-    pythonic_params=None,
-    resolver=None,
-    resolver_error=None,
-    strict_validation=None,
-    swagger_ui_options={'swagger_url': '/apidocs'},
-    uri_parser_class=None,
-    validate_responses=None,
-    validator_map=None,
-    security_map=None,
+    swagger_ui_options={'swagger_url': '/apidocs'}
 )
 
 from flask_cors import CORS
