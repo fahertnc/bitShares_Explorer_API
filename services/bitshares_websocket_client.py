@@ -9,23 +9,23 @@ logger = logging.getLogger(__name__)
 class RPCError(Exception):
     pass
 
-class BitsharesWebsocketClient:
+class BitsharesWebsocketClient():
     def __init__(self, websocket_url):
         self.url = websocket_url
-        self.request_id = 1
-        self.api_ids = {
-            'database': 0,
-            'login': 1
-        }
         self._connect()
 
     def _connect(self):
         try:
-            logger.info(f"Attempting to connect to WebSocket URL: {self.url}")
+            logger.debug(f"Connecting to WebSocket at {self.url}")
             self.ws = create_connection(self.url)
-            logger.info("WebSocket connection established.")
-        except WebSocketException as e:
-            logger.error(f"WebSocket connection failed: {e}")
+            self.request_id = 1
+            self.api_ids = {
+                'database': 0,
+                'login': 1
+            }
+            logger.debug("Connection established successfully")
+        except Exception as e:
+            logger.error(f"Failed to connect to WebSocket: {e}")
             raise
 
     def request(self, api, method_name, params):
