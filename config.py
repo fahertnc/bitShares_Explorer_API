@@ -1,7 +1,8 @@
 import os
 
 WEBSOCKET_URLS = "wss://dex.iobanker.com/ws"
-# WEBSOCKET_URLS = "ws://13.208.43.77:8090"
+#WEBSOCKET_URLS = "ws://13.208.43.77:8090"
+#WEBSOCKET_URLS = "ws://172.16.27.244:80"
 WEBSOCKET_URL = os.environ.get('WEBSOCKET_URL', WEBSOCKET_URLS)
 
 
