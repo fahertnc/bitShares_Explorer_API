@@ -1,4 +1,16 @@
 paths:
+  "/blockchain":
+    get:
+      description: Get chain id information.
+      operationId: api.explorer.get_chain_id
+      responses:
+        "200":
+          description: Array of operation data
+        "500":
+          description: Error processing parameters
+      tags:
+        - api
+        - chain id
   "/header":
     get:
       description: Get some blockchain information.
