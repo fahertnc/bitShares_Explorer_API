@@ -82,8 +82,20 @@ Install dependencies in virtual env activated:
 
 Note: If you have errors in the output about websocket you may need to also do:
 
-    apt-get install python-websocket
+Install Python WebSocket Library:
+Use pip to install a WebSocket library. One popular choice is websocket-client, which is used for creating WebSocket clients in Python.
 
+```bash
+    pip install websocket-client
+```
+
+If you specifically need a WebSocket server library, you might consider websockets:
+
+```bash
+    pip install websockets
+```
+
+Note: I
 Note: If you see a problem similar to:
 
      WARNING:connexion.options:The swagger_ui directory could not be found.
