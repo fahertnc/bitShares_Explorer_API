@@ -21,6 +21,13 @@ def get_header():
     response = bitshares_ws_client.request('database', 'get_dynamic_global_properties', [])
     return _add_global_informations(response, bitshares_ws_client)
 
+def get_chain_id():
+    try:
+        response = bitshares_ws_client.request('database', 'get_chain_properties', [])
+        chain_id = response.get('chain_id')
+        return {"chain_id": chain_id}
+    except Exception as e:
+        return connexion.problem(500, 'Internal Server Error', str(e))
 
 @cache.memoize()
 def get_account(account_id):
